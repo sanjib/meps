@@ -17,7 +17,8 @@ defmodule MepsWeb.Router do
   scope "/", MepsWeb do
     pipe_through :browser
 
-    live "/", PageLive, :index
+    #live "/", PageLive, :index
+    live "/", MepsLive
   end
 
   # Other scopes may use custom stacks.

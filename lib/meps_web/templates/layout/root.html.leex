@@ -14,14 +14,22 @@
       <section class="container">
         <nav role="navigation">
           <ul>
-            <li><a href="https://hexdocs.pm/phoenix/overview.html">Get Started</a></li>
-            <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-              <li><%= link "LiveDashboard", to: Routes.live_dashboard_path(@conn, :home) %></li>
-            <% end %>
+            <li></li>
           </ul>
         </nav>
-        <a href="https://phoenixframework.org/" class="phx-logo">
-          <img src="<%= Routes.static_path(@conn, "/images/phoenix.png") %>" alt="Phoenix Framework Logo"/>
+        <a href="/" class="meps-logo">
+          <% {img_name, img_alt} = Enum.random([
+          {"beauty-looking-back-moronobu.png", "Beauty Looking Back - Moronobu"},
+          {"girl-with-a-pearl-earring-vermeer.png", "Girl With a Pearl Earring - Vermeer"},
+          {"lady-with-an-ermine-vinci.png", "Lady With an Ermine - Vinci"},
+          {"milkmaid-vermeer.png", "Milkmaid - Vermeer"},
+          {"mona-lisa-vinci.png", "Mona Lisa - Vinci"},
+          {"otani-sharaku.png", "Otani - Sharaku"},
+          {"the-fifer-manet.png", "The Fifer - Manet"},
+          {"the-sower-millet.png", "The Sower - Millet"},
+          ])  %>
+          <img src="<%= Routes.static_path(@conn, "/images/#{img_name}") %>" alt="<%= img_alt %>"/>
+          <img src="<%= Routes.static_path(@conn, "/images/meps-logo-text.png") %>" alt="Most Expensive Paintings - Logo"/>
         </a>
       </section>
     </header>
