@@ -153,7 +153,7 @@ alias Meps.Paintings.Painting
   adjusted_price: 194_000_000,
   original_price: 180_000_000,
   painting: "Pendant portraits of Maerten Soolmans and Oopjen Coppit",
-  image: "maerten-soolmans-oopjen coppit.jpg",
+  image: "maerten-soolmans-oopjen-coppit.jpg",
   artist: "Rembrandt",
   year_start: 1634,
   year_end: 1634,

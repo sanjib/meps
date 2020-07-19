@@ -95,3 +95,51 @@
 .meps-logo {
   margin: 1rem 0;
 }
+
+/* ___ Paintings ___ */
+
+.paintings ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+.paintings li {
+  flex: 33% 0 0;
+  padding: 10px 10px 20px 10px;
+  line-height: 1.3em;
+}
+
+.paintings .image {
+  height: 250px;
+  background-size: cover !important;
+  background-position: left top !important;
+  //background-position: center !important;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.paintings .adjusted_price {
+  font-size: 2em;
+  line-height: 1.2em;
+}
+.paintings .title {
+  //font-size: 1.2em;
+}
+
+@media (max-width: 40.0rem) { /* Small devices (landscape phones, 576px and below) */
+  .paintings li {
+    flex: 100% 0 0;
+  }
+  .paintings .image {
+    height: 400px;
+  }
+}
+
+
+
+
+
+
+
+
+
