@@ -6,10 +6,43 @@ defmodule MepsWeb.MepsLive do
   def mount(_params, _session, socket) do
     paintings = Paintings.list_paintings()
     socket = assign(socket,
+      loading: false,
+      options_artists: options_artists(paintings),
+      selected_artist: "",
       paintings: paintings
     )
     {:ok, socket, temporary_assigns: [paintings: []]}
   end
+
+  #___________________
+  # Events
+
+  def handle_event("filter", %{"artist" => artist}, socket) do
+    send self(), {:filter_by_artist, artist}
+
+    socket = assign(socket, loading: true)
+    {:noreply, socket}
+  end
+
+  def handle_info({:filter_by_artist, artist}, socket) do
+    paintings =
+      case artist do
+        "" ->
+          Paintings.list_paintings()
+        artist ->
+          Paintings.list_by_artist(artist)
+      end
+
+    socket = assign(socket,
+      loading: false,
+      paintings: paintings
+    )
+    {:noreply, socket}
+  end
+
+
+  #___________________
+  # Helpers
 
   defp price_in_millions(price) do
     if rem(price, 1_000_000) == 0 do
@@ -46,10 +79,31 @@ defmodule MepsWeb.MepsLive do
     end
   end
 
+  defp options_artists(paintings) do
+    for painting <- paintings do
+      {painting.artist, painting.artist}
+    end
+    |> Enum.sort
+    |> List.insert_at(0, {"-All Artists-", ""})
+  end
+
   def render(assigns) do
     ~L"""
-    <br />
     <div class="paintings">
+      <form phx-change="filter">
+        <select name="artist">
+        <%= options_for_select(@options_artists, @selected_artist) %>
+        </select>
+      </form>
+
+      <%= if @loading do %>
+        <div class="loader">
+          <div class="bounce1"></div>
+          <div class="bounce2"></div>
+          <div class="bounce3"></div>
+        </div>
+      <% end %>
+
       <ul>
         <%= for painting <- @paintings do %>
         <li>

@@ -21,6 +21,11 @@ defmodule Meps.Paintings do
     Repo.all(Painting)
   end
 
+  def list_by_artist(artist) do
+    from(p in Painting, where: p.artist == ^artist)
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single painting.
 
