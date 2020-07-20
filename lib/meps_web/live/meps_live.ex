@@ -176,7 +176,7 @@ defmodule MepsWeb.MepsLive do
       <ul>
         <%= for painting <- @paintings do %>
         <li>
-          <div class="image" style="background: url(/images/paintings/<%= painting.image %>);" onclick="window.open('/images/paintings/<%= painting.image %>')"></div>
+          <div class="image" style="background: url(/images/paintings/thumbs/<%= painting.image %>);" onclick="window.open('/images/paintings/<%= painting.image %>')"></div>
           <div class="adjusted_price">
             <%= price_in_millions(painting.adjusted_price) %> million
           </div>
@@ -187,8 +187,8 @@ defmodule MepsWeb.MepsLive do
           </div>
           <div class="year"><span>Year:</span> <%= year(painting.year_start, painting.year_end) %></div>
           <div class="date_of_sale"><span>Date of Sale:</span> <%= date_of_sale(painting.date_of_sale_year, painting.date_of_sale_month, painting.date_of_sale_day) %></div>
-          <div><span>Seller:</span> <%= painting.seller %></div>
-          <div><span>Buyer:</span> <%= painting.buyer %></div>
+          <%= if painting.seller != "" do %><div><span>Seller:</span> <%= painting.seller %></div><% end %>
+          <%= if painting.buyer != "" do %><div><span>Buyer:</span> <%= painting.buyer %></div><% end %>
           <div><span>Auction House:</span> <%= painting.auction_house %></div>
         </li>
         <% end  %>

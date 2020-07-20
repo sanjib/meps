@@ -370,3 +370,175 @@ alias Meps.Paintings.Painting
 }
 |> Repo.insert!()
 
+%Painting{
+  adjusted_price: 146_900_000,
+  original_price: 140_800_000,
+  painting: "Twelve Landscape Screens",
+  image: "twelve_landscape_screens.jpg",
+  artist: "Qi Baishi",
+  year_start: 1925,
+  year_end: 1925,
+  date_of_sale_year: 2017,
+  date_of_sale_month: 12,
+  date_of_sale_day: 17,
+  seller: "",
+  buyer: "",
+  auction_house: "Beijing Poly Auction",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 141_000_000,
+  original_price: 104_200_000,
+  painting: "Garçon à la Pipe (Boy with a Pipe)",
+  image: "garcon_a_la_pipe.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1905,
+  year_end: 1905,
+  date_of_sale_year: 2004,
+  date_of_sale_month: 5,
+  date_of_sale_day: 5,
+  seller: "Greentree Foundation (Whitney family)",
+  buyer: "Guido Barilla (not confirmed)",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 133_600_000,
+  original_price: 119_900_000,
+  painting: "The Scream",
+  image: "the_scream.jpg",
+  artist: "Edvard Munch",
+  year_start: 1895,
+  year_end: 1895,
+  date_of_sale_year: 2012,
+  date_of_sale_month: 5,
+  date_of_sale_day: 2,
+  seller: "Petter Olsen",
+  buyer: "Leon Black",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 131_700_000,
+  original_price: 120_000_000,
+  painting: "Otahi",
+  image: "otahi.jpg",
+  artist: "Paul Gauguin",
+  year_start: 1893,
+  year_end: 1893,
+  date_of_sale_year: 2013,
+  date_of_sale_month: 0,
+  date_of_sale_day: 0,
+  seller: "Yves Bouvier",
+  buyer: "Dmitry Rybolovlev",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 131_000_000,
+  original_price: 118_000_000,
+  painting: "Reclining Nude With Blue Cushion",
+  image: "reclining_nude_with_blue_cushion.jpg",
+  artist: "Amedeo Modigliani",
+  year_start: 1917,
+  year_end: 1917,
+  date_of_sale_year: 2012,
+  date_of_sale_month: 0,
+  date_of_sale_day: 0,
+  seller: "Steven A. Cohen",
+  buyer: "Dmitry Rybolovlev",
+  auction_house: "Private sale via Yves Bouvier",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 129_000_000,
+  original_price: 110_000_000,
+  painting: "Flag",
+  image: "flag.jpg",
+  artist: "Jasper Johns",
+  year_start: 1958,
+  year_end: 1958,
+  date_of_sale_year: 2010,
+  date_of_sale_month: 3,
+  date_of_sale_day: 0,
+  seller: "Jean-Christophe Castelli",
+  buyer: "Steven A. Cohen",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 124_800_000,
+  original_price: 106_500_000,
+  painting: "Nude, Green Leaves and Bust",
+  image: "nude_green_leaves_and_bust.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1932,
+  year_end: 1932,
+  date_of_sale_year: 2010,
+  date_of_sale_month: 5,
+  date_of_sale_day: 4,
+  seller: "Frances Lasker Brody estate",
+  buyer: "Leonard Blavatnik (not confirmed)",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 123_800_000,
+  original_price: 58_000_000,
+  painting: "Portrait of Joseph Roulin",
+  image: "portrait_of_joseph_roulin.jpg",
+  artist: "Vincent van Gogh",
+  year_start: 1889,
+  year_end: 1889,
+  date_of_sale_year: 1989,
+  date_of_sale_month: 8,
+  date_of_sale_day: 1,
+  seller: "Private collection, Zürich",
+  buyer: "Museum of Modern Art New York",
+  auction_house: "Private sale via Thomas Ammann, Fine Art Zurich",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 121_300_000,
+  original_price: 53_900_000,
+  painting: "Irises",
+  image: "irises.jpg",
+  artist: "Vincent van Gogh",
+  year_start: 1889,
+  year_end: 1889,
+  date_of_sale_year: 1987,
+  date_of_sale_month: 11,
+  date_of_sale_day: 11,
+  seller: "John Whitney Payson, son of Joan Whitney Payson",
+  buyer: "Alan Bond",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 120_800_000,
+  original_price: 95_200_000,
+  painting: "Dora Maar au Chat",
+  image: "dora_maar_au_chat.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1941,
+  year_end: 1941,
+  date_of_sale_year: 2006,
+  date_of_sale_month: 5,
+  date_of_sale_day: 3,
+  seller: "Gidwitz family",
+  buyer: "Boris Ivanishvili",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+
+
