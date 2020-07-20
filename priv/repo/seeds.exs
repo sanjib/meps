@@ -118,8 +118,8 @@ alias Meps.Paintings.Painting
 %Painting{
   adjusted_price: 201_700_000,
   original_price: 183_800_000,
-  painting: "Wasserschlangen II",
-  image: "wasserschlangen-ii.jpg",
+  painting: "Wasserschlangen II (Water Serpents II)",
+  image: "wasserschlangen_ii.jpg",
   artist: "Gustav Klimt",
   year_start: 1904,
   year_end: 1907,
@@ -145,7 +145,7 @@ alias Meps.Paintings.Painting
   date_of_sale_day: 0,
   seller: "Cherise Moueix",
   buyer: "Dmitry Rybolovlev",
-  auction_house: "Yves Bouvier",
+  auction_house: "Private sale via Yves Bouvier",
 }
 |> Repo.insert!()
 
@@ -153,7 +153,7 @@ alias Meps.Paintings.Painting
   adjusted_price: 194_000_000,
   original_price: 180_000_000,
   painting: "Pendant portraits of Maerten Soolmans and Oopjen Coppit",
-  image: "maerten-soolmans-oopjen-coppit.jpg",
+  image: "maerten_soolmans_oopjen_coppit.jpg",
   artist: "Rembrandt",
   year_start: 1634,
   year_end: 1634,
@@ -197,6 +197,176 @@ alias Meps.Paintings.Painting
   seller: "Laura Mattioli Rossi",
   buyer: "Liu Yiqian",
   auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 177_600_000,
+  original_price: 140_000_000,
+  painting: "No. 5, 1948",
+  image: "no._5_1948.jpg",
+  artist: "Jackson Pollock",
+  year_start: 1948,
+  year_end: 1948,
+  date_of_sale_year: 20016,
+  date_of_sale_month: 11,
+  date_of_sale_day: 2,
+  seller: "David Geffen",
+  buyer: "David Martinez",
+  auction_house: "Private sale via Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 174_400_000,
+  original_price: 137_500_000,
+  painting: "Woman III",
+  image: "woman_iii.jpg",
+  artist: "Willem de Kooning",
+  year_start: 1953,
+  year_end: 1953,
+  date_of_sale_year: 20016,
+  date_of_sale_month: 11,
+  date_of_sale_day: 18,
+  seller: "David Geffen",
+  buyer: "Steven A. Cohen",
+  auction_house: "Private sale via Larry Gagosian",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 172_100_000,
+  original_price: 165_000_000,
+  painting: "Masterpiece",
+  image: "masterpiece.jpg",
+  artist: "Roy Lichtenstein",
+  year_start: 1962,
+  year_end: 1962,
+  date_of_sale_year: 2017,
+  date_of_sale_month: 1,
+  date_of_sale_day: 0,
+  seller: "Agnes Gund",
+  buyer: "Steven A. Cohen",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 171_200_000,
+  original_price: 135_000_000,
+  painting: "Portrait of Adele Bloch-Bauer I",
+  image: "portrait_of_adele_bloch_bauer_i.jpg",
+  artist: "Gustav Klimt",
+  year_start: 1907,
+  year_end: 1907,
+  date_of_sale_year: 2006,
+  date_of_sale_month: 6,
+  date_of_sale_day: 18,
+  seller: "Maria Altmann",
+  buyer: "Ronald Lauder, Neue Galerie",
+  auction_house: "Private sale via Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 170_100_000,
+  original_price: 155_000_000,
+  painting: "Le Rêve",
+  image: "le_reve.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1932,
+  year_end: 1932,
+  date_of_sale_year: 2013,
+  date_of_sale_month: 3,
+  date_of_sale_day: 26,
+  seller: "Steve Wynn",
+  buyer: "Steven A. Cohen",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 161_400_000,
+  original_price: 82_500_000,
+  painting: "Portrait of Dr. Gachet",
+  image: "portrait_of_dr._gachet.jpg",
+  artist: "Vincent van Gogh",
+  year_start: 1890,
+  year_end: 1890,
+  date_of_sale_year: 1990,
+  date_of_sale_month: 5,
+  date_of_sale_day: 15,
+  seller: "Siegfried Kramarsky heirs",
+  buyer: "Ryoei Saito",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 160_100_000,
+  original_price: 157_200_000,
+  painting: "Nu couché (sur le côté gauche)",
+  image: "nu_couche_sur_le_cote_gauche.jpg",
+  artist: "Amedeo Modigliani",
+  year_start: 1917,
+  year_end: 1917,
+  date_of_sale_year: 2018,
+  date_of_sale_month: 5,
+  date_of_sale_day: 15,
+  seller: "Ezra and David Nahmad",
+  buyer: "",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 159_800_000,
+  original_price: 150_000_000,
+  painting: "Adele Bloch-Bauer II",
+  image: "adele_bloch_bauer_ii.jpg",
+  artist: "Gustav Klimt",
+  year_start: 1912,
+  year_end: 1912,
+  date_of_sale_year: 2016,
+  date_of_sale_month: 0,
+  date_of_sale_day: 0,
+  seller: "Oprah Winfrey",
+  buyer: "Unidentified buyer in China",
+  auction_house: "Private sale via Larry Gagosian",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 156_300_000,
+  original_price: 142_400_000,
+  painting: "Three Studies of Lucian Freud",
+  image: "three_studies_of_lucian_freud.jpg",
+  artist: "Francis Bacon",
+  year_start: 1969,
+  year_end: 1969,
+  date_of_sale_year: 2013,
+  date_of_sale_month: 11,
+  date_of_sale_day: 12,
+  seller: "",
+  buyer: "Elaine Wynn, ex-wife of Steve Wynn",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 152_800_000,
+  original_price: 78_100_000,
+  painting: "Bal du moulin de la Galette (small version)",
+  image: "bal_du_moulin_de_la_galette.jpg",
+  artist: "Pierre-Auguste Renoir",
+  year_start: 1876,
+  year_end: 1876,
+  date_of_sale_year: 1990,
+  date_of_sale_month: 5,
+  date_of_sale_day: 17,
+  seller: "Betsey Whitney",
+  buyer: "Ryoei Saito",
+  auction_house: "Sotheby's",
 }
 |> Repo.insert!()
 

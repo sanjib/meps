@@ -18,11 +18,12 @@ defmodule Meps.Paintings do
 
   """
   def list_paintings do
-    Repo.all(Painting)
+    from(p in Painting, order_by: [desc: p.adjusted_price])
+    |> Repo.all
   end
 
   def list_by_artist(artist) do
-    from(p in Painting, where: p.artist == ^artist)
+    from(p in Painting, where: p.artist == ^artist, order_by: [desc: p.adjusted_price])
     |> Repo.all()
   end
 

@@ -83,6 +83,7 @@ defmodule MepsWeb.MepsLive do
     for painting <- paintings do
       {painting.artist, painting.artist}
     end
+    |> Enum.uniq
     |> Enum.sort
     |> List.insert_at(0, {"-All Artists-", ""})
   end
