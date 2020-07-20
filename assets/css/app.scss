@@ -169,6 +169,7 @@
   flex: 33% 0 0;
   padding: 10px 10px 20px 10px;
   line-height: 1.4em;
+  font-size: 0.9em;
 }
 
 .paintings .image {
@@ -180,11 +181,25 @@
   cursor: pointer;
 }
 .paintings .adjusted_price {
-  font-size: 2em;
+  font-size: 1.5em;
   line-height: 1.3em;
 }
-.paintings .title {
-  //font-size: 1.2em;
+.paintings .title
+{
+  font-size: 1.3em;
+  color: black;
+  line-height: 1.5em;
+}
+.paintings .artist {
+  font-size: 1.1em;
+  color: gray;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+
+.paintings span {
+  font-size: 0.8em;
+  text-transform: uppercase;
 }
 
 @media (max-width: 40.0rem) { /* Small devices (landscape phones, 576px and below) */

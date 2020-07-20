@@ -163,16 +163,16 @@ defmodule MepsWeb.MepsLive do
           <div class="adjusted_price">
             <%= price_in_millions(painting.adjusted_price) %> million
           </div>
+          <div class="title"><%= painting.painting %></div>
+          <div class="artist">by <%= painting.artist %></div>
           <div class="original_price">
-            Original Price: <%= price_in_millions(painting.original_price) %> million
+            <span>Original Price:</span> <%= price_in_millions(painting.original_price) %> million
           </div>
-          <div class="title">Title: <%= painting.painting %></div>
-          <div class="artist">Artist: <%= painting.artist %></div>
-          <div class="year">Year: <%= year(painting.year_start, painting.year_end) %></div>
-          <div class="date_of_sale">Date of Sale: <%= date_of_sale(painting.date_of_sale_year, painting.date_of_sale_month, painting.date_of_sale_day) %></div>
-          <div>Seller: <%= painting.seller %></div>
-          <div>Buyer: <%= painting.buyer %></div>
-          <div>Auction House: <%= painting.auction_house %></div>
+          <div class="year"><span>Year:</span> <%= year(painting.year_start, painting.year_end) %></div>
+          <div class="date_of_sale"><span>Date of Sale:</span> <%= date_of_sale(painting.date_of_sale_year, painting.date_of_sale_month, painting.date_of_sale_day) %></div>
+          <div><span>Seller:</span> <%= painting.seller %></div>
+          <div><span>Buyer:</span> <%= painting.buyer %></div>
+          <div><span>Auction House:</span> <%= painting.auction_house %></div>
         </li>
         <% end  %>
       </ul>
