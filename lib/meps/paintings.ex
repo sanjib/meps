@@ -27,6 +27,20 @@ defmodule Meps.Paintings do
     |> Repo.all()
   end
 
+  def list_by_century(century) do
+    century_end = century * 100
+    century_start = century_end - 99
+
+#    IO.puts "century_start: #{century_start}"
+#    IO.puts "century_start: #{century_end}"
+
+    from(p in Painting,
+      where: (p.year_start >= ^century_start and p.year_start <= ^century_end) or
+             (p.year_end >= ^century_start and p.year_end <= ^century_end),
+      order_by: [desc: p.adjusted_price])
+    |> Repo.all()
+  end
+
   @doc """
   Gets a single painting.
 

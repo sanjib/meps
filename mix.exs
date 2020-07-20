@@ -47,7 +47,10 @@ defmodule Meps.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:number, "~> 1.0"}
+      {:number, "~> 1.0"},
+      {:ex_cldr, "~> 2.16"},
+      {:ex_cldr_numbers, "~> 2.15"},
+      {:inflex, "~> 2.1"},
     ]
   end
 

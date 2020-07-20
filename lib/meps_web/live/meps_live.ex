@@ -7,8 +7,10 @@ defmodule MepsWeb.MepsLive do
     paintings = Paintings.list_paintings()
     socket = assign(socket,
       loading: false,
-      options_artists: options_artists(paintings),
+      options_artist: options_artist(paintings),
+      options_century: options_century(paintings),
       selected_artist: "",
+      selected_century: "",
       paintings: paintings
     )
     {:ok, socket, temporary_assigns: [paintings: []]}
@@ -17,10 +19,16 @@ defmodule MepsWeb.MepsLive do
   #___________________
   # Events
 
-  def handle_event("filter", %{"artist" => artist}, socket) do
+  def handle_event("filter_by_artist", %{"artist" => artist}, socket) do
     send self(), {:filter_by_artist, artist}
+    socket = assign(socket, loading: true, selected_artist: artist, selected_century: "")
+    {:noreply, socket}
+  end
 
-    socket = assign(socket, loading: true)
+  def handle_event("filter_by_century", %{"century" => century}, socket) do
+    century = if century != "", do: String.to_integer(century), else: ""
+    send self(), {:filter_by_century, century}
+    socket = assign(socket, loading: true, selected_artist: "", selected_century: century)
     {:noreply, socket}
   end
 
@@ -40,6 +48,21 @@ defmodule MepsWeb.MepsLive do
     {:noreply, socket}
   end
 
+  def handle_info({:filter_by_century, century}, socket) do
+    paintings =
+      case century do
+        "" ->
+          Paintings.list_paintings()
+        artist ->
+          Paintings.list_by_century(century)
+      end
+
+    socket = assign(socket,
+      loading: false,
+      paintings: paintings
+    )
+    {:noreply, socket}
+  end
 
   #___________________
   # Helpers
@@ -79,7 +102,7 @@ defmodule MepsWeb.MepsLive do
     end
   end
 
-  defp options_artists(paintings) do
+  defp options_artist(paintings) do
     for painting <- paintings do
       {painting.artist, painting.artist}
     end
@@ -88,14 +111,42 @@ defmodule MepsWeb.MepsLive do
     |> List.insert_at(0, {"-All Artists-", ""})
   end
 
+  defp options_century(paintings) do
+    for painting <- paintings do
+      century_year_start = year_to_century(painting.year_start)
+      {:ok, century_ordinal_year_start} = Meps.Cldr.Number.to_string century_year_start, format: :ordinal
+
+      century_year_end = year_to_century(painting.year_end)
+      {:ok, century_ordinal_year_end} = Meps.Cldr.Number.to_string century_year_end, format: :ordinal
+
+      [{century_ordinal_year_start, century_year_start}, {century_ordinal_year_end, century_year_end}]
+    end
+    |> Enum.concat
+    |> Enum.uniq
+    |> Enum.sort(:desc)
+    |> List.insert_at(0, {"-All Centuries-", ""})
+  end
+
+  defp year_to_century(year) do
+    if rem(year, 100) == 0, do: div(year, 100), else: div(year, 100) + 1
+  end
+
   def render(assigns) do
     ~L"""
     <div class="paintings">
-      <form phx-change="filter">
-        <select name="artist">
-        <%= options_for_select(@options_artists, @selected_artist) %>
-        </select>
-      </form>
+      <div class="filter_forms">
+        <form phx-change="filter_by_artist">
+          <select name="artist">
+            <%= options_for_select(@options_artist, @selected_artist) %>
+          </select>
+        </form>
+        <form phx-change="filter_by_century">
+          <select name="century">
+            <%= options_for_select(@options_century, @selected_century) %>
+          </select>
+        </form>
+        <div class="count">Found <%= length(@paintings) %> <%= Inflex.inflect("painting", length(@paintings)) %></div>
+      </div>
 
       <%= if @loading do %>
         <div class="loader">

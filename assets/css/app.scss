@@ -142,8 +142,21 @@
 
 /* ___ Paintings ___ */
 
+.paintings .filter_forms {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
 .paintings form {
   margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.paintings .count {
+  margin-top: 10px;
+  margin-left: auto;
+  font-size: 0.9em;
 }
 
 .paintings ul {
@@ -155,7 +168,7 @@
 .paintings li {
   flex: 33% 0 0;
   padding: 10px 10px 20px 10px;
-  line-height: 1.3em;
+  line-height: 1.4em;
 }
 
 .paintings .image {
@@ -168,7 +181,7 @@
 }
 .paintings .adjusted_price {
   font-size: 2em;
-  line-height: 1.2em;
+  line-height: 1.3em;
 }
 .paintings .title {
   //font-size: 1.2em;
