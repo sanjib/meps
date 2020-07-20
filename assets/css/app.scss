@@ -153,10 +153,17 @@
   margin-right: 10px;
 }
 
+.paintings .clear,
 .paintings .count {
   margin-top: 10px;
-  margin-left: auto;
   font-size: 0.9em;
+}
+.paintings .clear {
+  text-decoration: underline;
+}
+
+.paintings .count {
+  margin-left: auto;
 }
 
 .paintings ul {

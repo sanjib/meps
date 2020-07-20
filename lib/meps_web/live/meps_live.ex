@@ -32,6 +32,12 @@ defmodule MepsWeb.MepsLive do
     {:noreply, socket}
   end
 
+  def handle_event("clear", _, socket) do
+    send self(), {:clear}
+    socket = assign(socket, loading: true, selected_artist: "", selected_century: "")
+    {:noreply, socket}
+  end
+
   def handle_info({:filter_by_artist, artist}, socket) do
     paintings =
       case artist do
@@ -56,6 +62,16 @@ defmodule MepsWeb.MepsLive do
         artist ->
           Paintings.list_by_century(century)
       end
+
+    socket = assign(socket,
+      loading: false,
+      paintings: paintings
+    )
+    {:noreply, socket}
+  end
+
+  def handle_info({:clear}, socket) do
+    paintings = Paintings.list_paintings()
 
     socket = assign(socket,
       loading: false,
@@ -145,6 +161,7 @@ defmodule MepsWeb.MepsLive do
             <%= options_for_select(@options_century, @selected_century) %>
           </select>
         </form>
+        <div class="clear"><a phx-click="clear" href="/#">Clear All</a></div>
         <div class="count">Found <%= length(@paintings) %> <%= Inflex.inflect("painting", length(@paintings)) %></div>
       </div>
 
