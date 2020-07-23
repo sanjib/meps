@@ -8,6 +8,8 @@ defmodule Meps.Paintings do
 
   alias Meps.Paintings.Painting
 
+  @sleep_for_testing 0
+
   @doc """
   Returns the list of paintings.
 
@@ -17,17 +19,28 @@ defmodule Meps.Paintings do
       [%Painting{}, ...]
 
   """
+  def list_paintings_without_sleep do
+    from(p in Painting, order_by: [desc: p.adjusted_price])
+    |> Repo.all
+  end
+
   def list_paintings do
+    :timer.sleep(@sleep_for_testing)
+
     from(p in Painting, order_by: [desc: p.adjusted_price])
     |> Repo.all
   end
 
   def list_by_artist(artist) do
+    :timer.sleep(@sleep_for_testing)
+
     from(p in Painting, where: p.artist == ^artist, order_by: [desc: p.adjusted_price])
     |> Repo.all()
   end
 
   def list_by_century(century) do
+    :timer.sleep(@sleep_for_testing)
+
     century_end = century * 100
     century_start = century_end - 99
 

@@ -1,0 +1,45 @@
+<div class="paintings">
+  <div class="filter_forms">
+    <form phx-change="filter_by_artist">
+      <select name="artist">
+        <%= options_for_select(@options_artist, @selected_artist) %>
+      </select>
+    </form>
+    <form phx-change="filter_by_century">
+      <select name="century">
+        <%= options_for_select(@options_century, @selected_century) %>
+      </select>
+    </form>
+    <div class="clear"><a phx-click="clear" href="#/">Clear All</a></div>
+    <div class="count">Found <%= length(@paintings) %> <%= Inflex.inflect("painting", length(@paintings)) %></div>
+  </div>
+
+  <%= if @loading do %>
+    <div class="loader">
+      <div class="bounce1"></div>
+      <div class="bounce2"></div>
+      <div class="bounce3"></div>
+    </div>
+  <% end %>
+
+  <ul>
+    <%= for painting <- @paintings do %>
+    <li>
+      <div class="image" style="background: url('/images/paintings/thumbs/<%= painting.image %>');" onclick="window.open('/images/paintings/<%= painting.image %>')"></div>
+      <div class="adjusted_price">
+        <%= price_in_millions(painting.adjusted_price) %> million
+      </div>
+      <div class="title"><%= painting.painting %></div>
+      <div class="artist">by <%= painting.artist %></div>
+      <div class="original_price">
+        <span>Original Price:</span> <%= price_in_millions(painting.original_price) %> million
+      </div>
+      <div class="year"><span>Year:</span> <%= year(painting.year_start, painting.year_end) %></div>
+      <div class="date_of_sale"><span>Date of Sale:</span> <%= date_of_sale(painting.date_of_sale_year, painting.date_of_sale_month, painting.date_of_sale_day) %></div>
+      <%= if painting.seller != "" do %><div><span>Seller:</span> <%= painting.seller %></div><% end %>
+      <%= if painting.buyer != "" do %><div><span>Buyer:</span> <%= painting.buyer %></div><% end %>
+      <div><span>Auction House:</span> <%= painting.auction_house %></div>
+    </li>
+    <% end  %>
+  </ul>
+</div>

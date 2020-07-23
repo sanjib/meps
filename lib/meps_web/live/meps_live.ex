@@ -4,84 +4,114 @@ defmodule MepsWeb.MepsLive do
   alias Meps.Paintings
 
   def mount(_params, _session, socket) do
-    paintings = Paintings.list_paintings()
+    paintings = Paintings.list_paintings_without_sleep()
     socket = assign(socket,
-      loading: false,
       options_artist: options_artist(paintings),
       options_century: options_century(paintings),
-      selected_artist: "",
-      selected_century: "",
-      paintings: paintings
     )
     {:ok, socket, temporary_assigns: [paintings: []]}
   end
 
-  #___________________
-  # Events
+  ### HANDLE PARAMS ###
 
-  def handle_event("filter_by_artist", %{"artist" => artist}, socket) do
-    send self(), {:filter_by_artist, artist}
-    socket = assign(socket, loading: true, selected_artist: artist, selected_century: "")
-    {:noreply, socket}
-  end
+  def handle_params(params, _uri, socket) do
+    IO.puts "--> params: #{inspect params}"
+    artist = get_params_artist(params["artist"])
+    century = get_params_century(params["century"])
 
-  def handle_event("filter_by_century", %{"century" => century}, socket) do
-    century = if century != "", do: String.to_integer(century), else: ""
-    send self(), {:filter_by_century, century}
-    socket = assign(socket, loading: true, selected_artist: "", selected_century: century)
-    {:noreply, socket}
-  end
+    IO.puts "--> artist: #{inspect artist}"
+    IO.puts "--> century: #{inspect century}"
 
-  def handle_event("clear", _, socket) do
-    send self(), {:clear}
-    socket = assign(socket, loading: true, selected_artist: "", selected_century: "")
-    {:noreply, socket}
-  end
-
-  def handle_info({:filter_by_artist, artist}, socket) do
-    paintings =
-      case artist do
-        "" ->
-          Paintings.list_paintings()
-        artist ->
-          Paintings.list_by_artist(artist)
-      end
+    send_message(artist, century)
 
     socket = assign(socket,
-      loading: false,
-      paintings: paintings
+      loading: true,
+      paintings: [],
+      selected_artist: artist,
+      selected_century: century
     )
+
     {:noreply, socket}
+  end
+
+  defp get_params_artist(nil), do: nil
+  defp get_params_artist(""), do: nil
+  defp get_params_artist(artist), do: URI.decode(artist)
+
+  defp get_params_century(nil), do: nil
+  defp get_params_century(""), do: nil
+  defp get_params_century(century), do: String.to_integer(century)
+
+  ### SEND MESSAGE ###
+
+  defp send_message(nil, nil) do
+    send self(), {:clear}
+  end
+
+  defp send_message(artist, nil) do
+    send self(), {:filter_by_artist, artist}
+  end
+
+  defp send_message(nil, century) do
+    send self(), {:filter_by_century, century}
+  end
+
+  ### HANDLE INFO ###
+
+  def handle_info({:filter_by_artist, artist}, socket) do
+    case Paintings.list_by_artist(artist) do
+      [] ->
+        socket =
+          socket
+          |> put_flash(:info, "Couldn't find any painting for artist: #{artist}")
+          |> assign(loading: false, paintings: [])
+        {:noreply, socket}
+      paintings ->
+        socket = assign(socket, loading: false, paintings: paintings)
+        {:noreply, socket}
+    end
   end
 
   def handle_info({:filter_by_century, century}, socket) do
-    paintings =
-      case century do
-        "" ->
-          Paintings.list_paintings()
-        artist ->
-          Paintings.list_by_century(century)
-      end
-
-    socket = assign(socket,
-      loading: false,
-      paintings: paintings
-    )
-    {:noreply, socket}
+    case Paintings.list_by_century(century) do
+      [] ->
+        {:ok, century_ordinal} = Meps.Cldr.Number.to_string century, format: :ordinal
+        socket =
+          socket
+          |> put_flash(:info, "Couldn't find any painting for #{century_ordinal} century")
+          |> assign(loading: false, paintings: [])
+        {:noreply, socket}
+      paintings ->
+        socket = assign(socket, loading: false, paintings: paintings)
+        {:noreply, socket}
+    end
   end
 
   def handle_info({:clear}, socket) do
     paintings = Paintings.list_paintings()
-
-    socket = assign(socket,
-      loading: false,
-      paintings: paintings
-    )
+    socket = assign(socket, loading: false, paintings: paintings)
     {:noreply, socket}
   end
 
-  #___________________
-  # Helpers
+  ### HANDLE EVENTS ###
+
+  def handle_event("filter_by_artist", %{"artist" => artist}, socket) do
+    artist = URI.encode(artist)
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__, artist: artist, century: "")
+    {:noreply, socket}
+  end
+
+  def handle_event("filter_by_century", %{"century" => century}, socket) do
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__, artist: "", century: century)
+    {:noreply, socket}
+  end
+
+  def handle_event("clear", _, socket) do
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__, artist: "", century: "")
+    {:noreply, socket}
+  end
+
+  ### HELPERS ###
 
   defp price_in_millions(price) do
     if rem(price, 1_000_000) == 0 do
@@ -145,57 +175,6 @@ defmodule MepsWeb.MepsLive do
 
   defp year_to_century(year) do
     if rem(year, 100) == 0, do: div(year, 100), else: div(year, 100) + 1
-  end
-
-  def render(assigns) do
-    ~L"""
-    <div class="paintings">
-      <div class="filter_forms">
-        <form phx-change="filter_by_artist">
-          <select name="artist">
-            <%= options_for_select(@options_artist, @selected_artist) %>
-          </select>
-        </form>
-        <form phx-change="filter_by_century">
-          <select name="century">
-            <%= options_for_select(@options_century, @selected_century) %>
-          </select>
-        </form>
-        <div class="clear"><a phx-click="clear" href="/#">Clear All</a></div>
-        <div class="count">Found <%= length(@paintings) %> <%= Inflex.inflect("painting", length(@paintings)) %></div>
-      </div>
-
-      <%= if @loading do %>
-        <div class="loader">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-        </div>
-      <% end %>
-
-      <ul>
-        <%= for painting <- @paintings do %>
-        <li>
-          <div class="image" style="background: url(/images/paintings/thumbs/<%= painting.image %>);" onclick="window.open('/images/paintings/<%= painting.image %>')"></div>
-          <div class="adjusted_price">
-            <%= price_in_millions(painting.adjusted_price) %> million
-          </div>
-          <div class="title"><%= painting.painting %></div>
-          <div class="artist">by <%= painting.artist %></div>
-          <div class="original_price">
-            <span>Original Price:</span> <%= price_in_millions(painting.original_price) %> million
-          </div>
-          <div class="year"><span>Year:</span> <%= year(painting.year_start, painting.year_end) %></div>
-          <div class="date_of_sale"><span>Date of Sale:</span> <%= date_of_sale(painting.date_of_sale_year, painting.date_of_sale_month, painting.date_of_sale_day) %></div>
-          <%= if painting.seller != "" do %><div><span>Seller:</span> <%= painting.seller %></div><% end %>
-          <%= if painting.buyer != "" do %><div><span>Buyer:</span> <%= painting.buyer %></div><% end %>
-          <div><span>Auction House:</span> <%= painting.auction_house %></div>
-        </li>
-        <% end  %>
-      </ul>
-    </div>
-
-    """
   end
 
 end
