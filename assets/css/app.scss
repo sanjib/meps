@@ -142,27 +142,37 @@
 
 /* ___ Paintings ___ */
 
-.paintings .filter_forms {
+.filters_and_sorts {
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
-}
-
-.paintings form {
+  flex-wrap: wrap;
+  margin-top: 30px;
   margin-bottom: 10px;
+}
+.filters_and_sorts form {
+  margin-bottom: 0;
   margin-right: 10px;
 }
-
-.paintings .clear,
-.paintings .count {
-  margin-top: 10px;
+.filters_and_sorts select {
+  margin-bottom: 0;
+}
+.filters_and_sorts form:nth-child(3) {
+  margin-left: auto;
+  margin-right: 0;
+}
+.clear_and_results {
+  margin-bottom: 20px;
+  display: flex;
+}
+.clear_and_results .clear,
+.clear_and_results .count {
   font-size: 0.9em;
 }
-.paintings .clear {
+.clear_and_results .clear {
   text-decoration: underline;
-  margin-left: 10px;
 }
-.paintings .clear a {
+.clear_and_results .clear a {
   color: dimgray;
 }
 
@@ -177,7 +187,7 @@
   margin: -10px;
 }
 .paintings li {
-  flex: 33% 0 0;
+  flex: 33.3% 0 0;
   padding: 10px 10px 20px 10px;
   line-height: 1.4em;
   font-size: 0.9em;
@@ -214,6 +224,15 @@
 }
 
 @media (max-width: 40.0rem) { /* Small devices (landscape phones, 576px and below) */
+  .filters_and_sorts form:nth-child(3) {
+    padding-top: 10px;
+    flex-basis: 100%;
+  }
+  .filters_and_sorts span,
+  .clear_and_results span {
+    width: 60px;
+    display: inline-block;
+  }
   .paintings li {
     flex: 100% 0 0;
   }

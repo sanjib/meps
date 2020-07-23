@@ -19,38 +19,59 @@ defmodule Meps.Paintings do
       [%Painting{}, ...]
 
   """
-  def list_paintings_without_sleep do
-    from(p in Painting, order_by: [desc: p.adjusted_price])
-    |> Repo.all
-  end
-
   def list_paintings do
-    :timer.sleep(@sleep_for_testing)
-
     from(p in Painting, order_by: [desc: p.adjusted_price])
     |> Repo.all
   end
 
-  def list_by_artist(artist) do
+  def list_paintings(sort_by, sort_order) do
     :timer.sleep(@sleep_for_testing)
 
-    from(p in Painting, where: p.artist == ^artist, order_by: [desc: p.adjusted_price])
+    query = case sort_by do
+      :price ->
+        from(p in Painting, order_by: [{^sort_order, :adjusted_price}])
+      :year ->
+        from(p in Painting, order_by: [{^sort_order, :year_end}])
+    end
+
+    query
+    |> Repo.all
+  end
+
+  def list_by_artist(artist, sort_by, sort_order) do
+    :timer.sleep(@sleep_for_testing)
+
+    query = case sort_by do
+      :price ->
+        from(p in Painting, where: p.artist == ^artist, order_by: [{^sort_order, :adjusted_price}])
+      :year ->
+        from(p in Painting, where: p.artist == ^artist, order_by: [{^sort_order, :year_end}])
+    end
+
+    query
     |> Repo.all()
   end
 
-  def list_by_century(century) do
+  def list_by_century(century, sort_by, sort_order) do
     :timer.sleep(@sleep_for_testing)
 
     century_end = century * 100
     century_start = century_end - 99
 
-#    IO.puts "century_start: #{century_start}"
-#    IO.puts "century_start: #{century_end}"
+    query = case sort_by do
+      :price ->
+        from(p in Painting,
+          where: (p.year_start >= ^century_start and p.year_start <= ^century_end) or
+                 (p.year_end >= ^century_start and p.year_end <= ^century_end),
+          order_by: [{^sort_order, :adjusted_price}])
+      :year ->
+        from(p in Painting,
+          where: (p.year_start >= ^century_start and p.year_start <= ^century_end) or
+                 (p.year_end >= ^century_start and p.year_end <= ^century_end),
+          order_by: [{^sort_order, :year_end}])
+    end
 
-    from(p in Painting,
-      where: (p.year_start >= ^century_start and p.year_start <= ^century_end) or
-             (p.year_end >= ^century_start and p.year_end <= ^century_end),
-      order_by: [desc: p.adjusted_price])
+    query
     |> Repo.all()
   end
 

@@ -4,10 +4,16 @@ defmodule MepsWeb.MepsLive do
   alias Meps.Paintings
 
   def mount(_params, _session, socket) do
-    paintings = Paintings.list_paintings_without_sleep()
+    paintings = Paintings.list_paintings()
     socket = assign(socket,
       options_artist: options_artist(paintings),
       options_century: options_century(paintings),
+      options_sort: %{
+        "Price (high to low)" => "price:desc",
+        "Price (low to high)" => "price:asc",
+        "Year (old to new)" => "year:asc",
+        "Year (new to old)" => "year:desc",
+      }
     )
     {:ok, socket, temporary_assigns: [paintings: []]}
   end
@@ -18,17 +24,18 @@ defmodule MepsWeb.MepsLive do
     IO.puts "--> params: #{inspect params}"
     artist = get_params_artist(params["artist"])
     century = get_params_century(params["century"])
+    sort_by = get_params_sort_by(params["sort_by"])
+    sort_order = get_params_sort_order(params["sort_order"])
+    selected_sort = Atom.to_string(sort_by) <> ":" <> Atom.to_string(sort_order)
 
-    IO.puts "--> artist: #{inspect artist}"
-    IO.puts "--> century: #{inspect century}"
-
-    send_message(artist, century)
+    send_message(artist, century, sort_by, sort_order)
 
     socket = assign(socket,
       loading: true,
       paintings: [],
       selected_artist: artist,
-      selected_century: century
+      selected_century: century,
+      selected_sort: selected_sort
     )
 
     {:noreply, socket}
@@ -42,24 +49,35 @@ defmodule MepsWeb.MepsLive do
   defp get_params_century(""), do: nil
   defp get_params_century(century), do: String.to_integer(century)
 
+  defp get_params_sort_by(nil), do: :price
+  defp get_params_sort_by(""), do: :price
+  defp get_params_sort_by(sort_by), do: sort_by |> String.to_atom
+
+  defp get_params_sort_order(nil), do: :desc
+  defp get_params_sort_order(""), do: :desc
+  defp get_params_sort_order(sort_order), do: sort_order |> String.to_atom
+
+  defp get_params_from_selected_sort(""), do: ["", ""]
+  defp get_params_from_selected_sort(selected_sort), do: String.split(selected_sort, ":")
+
   ### SEND MESSAGE ###
 
-  defp send_message(nil, nil) do
-    send self(), {:clear}
+  defp send_message(nil, nil, sort_by, sort_order) do
+    send self(), {:clear, sort_by, sort_order}
   end
 
-  defp send_message(artist, nil) do
-    send self(), {:filter_by_artist, artist}
+  defp send_message(artist, nil, sort_by, sort_order) do
+    send self(), {:filter_by_artist, artist, sort_by, sort_order}
   end
 
-  defp send_message(nil, century) do
-    send self(), {:filter_by_century, century}
+  defp send_message(nil, century, sort_by, sort_order) do
+    send self(), {:filter_by_century, century, sort_by, sort_order}
   end
 
   ### HANDLE INFO ###
 
-  def handle_info({:filter_by_artist, artist}, socket) do
-    case Paintings.list_by_artist(artist) do
+  def handle_info({:filter_by_artist, artist, sort_by, sort_order}, socket) do
+    case Paintings.list_by_artist(artist, sort_by, sort_order) do
       [] ->
         socket =
           socket
@@ -72,8 +90,8 @@ defmodule MepsWeb.MepsLive do
     end
   end
 
-  def handle_info({:filter_by_century, century}, socket) do
-    case Paintings.list_by_century(century) do
+  def handle_info({:filter_by_century, century, sort_by, sort_order}, socket) do
+    case Paintings.list_by_century(century, sort_by, sort_order) do
       [] ->
         {:ok, century_ordinal} = Meps.Cldr.Number.to_string century, format: :ordinal
         socket =
@@ -87,8 +105,8 @@ defmodule MepsWeb.MepsLive do
     end
   end
 
-  def handle_info({:clear}, socket) do
-    paintings = Paintings.list_paintings()
+  def handle_info({:clear, sort_by, sort_order}, socket) do
+    paintings = Paintings.list_paintings(sort_by, sort_order)
     socket = assign(socket, loading: false, paintings: paintings)
     {:noreply, socket}
   end
@@ -97,17 +115,45 @@ defmodule MepsWeb.MepsLive do
 
   def handle_event("filter_by_artist", %{"artist" => artist}, socket) do
     artist = URI.encode(artist)
-    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__, artist: artist, century: "")
+    [sort_by, sort_order] = get_params_from_selected_sort(socket.assigns.selected_sort)
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__,
+      artist: artist,
+      century: "",
+      sort_by: sort_by,
+      sort_order: sort_order
+    )
     {:noreply, socket}
   end
 
   def handle_event("filter_by_century", %{"century" => century}, socket) do
-    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__, artist: "", century: century)
+    [sort_by, sort_order] = get_params_from_selected_sort(socket.assigns.selected_sort)
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__,
+      artist: "",
+      century: century,
+      sort_by: sort_by,
+      sort_order: sort_order
+    )
     {:noreply, socket}
   end
 
   def handle_event("clear", _, socket) do
-    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__, artist: "", century: "")
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__,
+      artist: "",
+      century: "",
+      sort_by: "",
+      sort_order: ""
+    )
+    {:noreply, socket}
+  end
+
+  def handle_event("sort", %{"sort" => sort}, socket) do
+    [sort_by, sort_order] = get_params_from_selected_sort(sort)
+    socket = push_patch socket, to: Routes.live_path(socket, __MODULE__,
+      artist: socket.assigns.selected_artist,
+      century: socket.assigns.selected_century,
+      sort_by: sort_by,
+      sort_order: sort_order
+    )
     {:noreply, socket}
   end
 
@@ -154,7 +200,7 @@ defmodule MepsWeb.MepsLive do
     end
     |> Enum.uniq
     |> Enum.sort
-    |> List.insert_at(0, {"-All Artists-", ""})
+    |> List.insert_at(0, {"All Artists", ""})
   end
 
   defp options_century(paintings) do
@@ -170,7 +216,7 @@ defmodule MepsWeb.MepsLive do
     |> Enum.concat
     |> Enum.uniq
     |> Enum.sort(:desc)
-    |> List.insert_at(0, {"-All Centuries-", ""})
+    |> List.insert_at(0, {"All Centuries", ""})
   end
 
   defp year_to_century(year) do

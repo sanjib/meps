@@ -1,6 +1,7 @@
 <div class="paintings">
-  <div class="filter_forms">
+  <div class="filters_and_sorts">
     <form phx-change="filter_by_artist">
+      <span>Filter</span>
       <select name="artist">
         <%= options_for_select(@options_artist, @selected_artist) %>
       </select>
@@ -10,8 +11,16 @@
         <%= options_for_select(@options_century, @selected_century) %>
       </select>
     </form>
+    <form phx-change="sort">
+      <span>Sort</span>
+      <select name="sort">
+        <%= options_for_select(@options_sort, @selected_sort) %>
+      </select>
+    </form>
+  </div>
+  <div class="clear_and_results">
     <div class="clear"><a phx-click="clear" href="#/">Clear All</a></div>
-    <div class="count">Found <%= length(@paintings) %> <%= Inflex.inflect("painting", length(@paintings)) %></div>
+    <div class="count">Found <strong><%= length(@paintings) %></strong> <%= Inflex.inflect("painting", length(@paintings)) %></div>
   </div>
 
   <%= if @loading do %>
