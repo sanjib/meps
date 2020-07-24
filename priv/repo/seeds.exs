@@ -540,5 +540,513 @@ alias Meps.Paintings.Painting
 }
 |> Repo.insert!()
 
+%Painting{
+  adjusted_price: 118_700_000,
+  original_price: 100_000_000,
+  painting: "Eight Elvises",
+  image: "eight_elvises.jpg",
+  artist: "Andy Warhol",
+  year_start: 1963,
+  year_end: 1963,
+  date_of_sale_year: 2008,
+  date_of_sale_month: 10,
+  date_of_sale_day: 0,
+  seller: "Annibale Berlingieri",
+  buyer: "The State of Qatar (not confirmed)",
+  auction_house: "Private sale via Philippe Ségalot",
+}
+|> Repo.insert!()
 
+%Painting{
+  adjusted_price: 117_100_000,
+  original_price: 115_000_000,
+  painting: "Young Girl with a Flower Basket",
+  image: "young_girl_with_a_flower_basket.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1905,
+  year_end: 1905,
+  date_of_sale_year: 2018,
+  date_of_sale_month: 5,
+  date_of_sale_day: 8,
+  seller: "David and Peggy Rockefeller",
+  buyer: "The Nahmad family",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 116_000_000,
+  original_price: 105_700_000,
+  painting: "Anna's Light",
+  image: "annas_light.jpg",
+  artist: "Barnett Newman",
+  year_start: 1968,
+  year_end: 1968,
+  date_of_sale_year: 2013,
+  date_of_sale_month: 10,
+  date_of_sale_day: 4,
+  seller: "DIC Corp.",
+  buyer: "",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 115_700_000,
+  original_price: 105_400_000,
+  painting: "Silver Car Crash (Double Disaster)",
+  image: "silver_car_crash.jpg",
+  artist: "Andy Warhol",
+  year_start: 1963,
+  year_end: 1963,
+  date_of_sale_year: 2013,
+  date_of_sale_month: 11,
+  date_of_sale_day: 13,
+  seller: "Sotheby's",
+  buyer: "",
+  auction_house: "",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 115_300_000,
+  original_price: 110_500_000,
+  painting: "Untitled",
+  image: "untitled_basquiat.jpg",
+  artist: "Jean-Michel Basquiat",
+  year_start: 1982,
+  year_end: 1982,
+  date_of_sale_year: 2017,
+  date_of_sale_month: 5,
+  date_of_sale_day: 18,
+  seller: "Basquiat family",
+  buyer: "Yusaku Maezawa",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 110_700_000,
+  original_price: 110_700_000,
+  painting: "Meules",
+  image: "meules.jpg",
+  artist: "Claude Monet",
+  year_start: 1890,
+  year_end: 1890,
+  date_of_sale_year: 2019,
+  date_of_sale_month: 5,
+  date_of_sale_day: 14,
+  seller: "",
+  buyer: "",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 112_200_000,
+  original_price: 71_500_000,
+  painting: "Portrait de l'artiste sans barbe",
+  image: "portrait_de_l-artiste_sans_barbe.jpg",
+  artist: "Vincent van Gogh",
+  year_start: 1889,
+  year_end: 1889,
+  date_of_sale_year: 1998,
+  date_of_sale_month: 11,
+  date_of_sale_day: 19,
+  seller: "Jacques Koerfer heirs",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 110_000_000,
+  original_price: 100_000_000,
+  painting: "La Montagne Sainte-Victoire vue du bosquet du Château Noir",
+  image: "la_montagne_sainte_victoire_vue_du_bosquet_du_chateau_noir.jpg",
+  artist: "Paul Cézanne",
+  year_start: 1904,
+  year_end: 1904,
+  date_of_sale_year: 2013,
+  date_of_sale_month: 0,
+  date_of_sale_day: 0,
+  seller: "Edsel and Eleanor Ford House",
+  buyer: "State of Qatar",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 109_000_000,
+  original_price: 76_700_000,
+  painting: "Massacre of the Innocents",
+  image: "massacre_of_the_innocents.jpg",
+  artist: "Peter Paul Rubens",
+  year_start: 1611,
+  year_end: 1611,
+  date_of_sale_year: 2002,
+  date_of_sale_month: 7,
+  date_of_sale_day: 10,
+  seller: "An Austrian family",
+  buyer: "Kenneth Thomson",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 102_900_000,
+  original_price: 95_400_000,
+  painting: "Nurse",
+  image: "nurse.jpg",
+  artist: "Roy Lichtenstein",
+  year_start: 1964,
+  year_end: 1964,
+  date_of_sale_year: 2015,
+  date_of_sale_month: 11,
+  date_of_sale_day: 9,
+  seller: "",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 102_500_000,
+  original_price: 86_300_000,
+  painting: "Triptych, 1976",
+  image: "triptych_1976.jpg",
+  artist: "Francis Bacon",
+  year_start: 1976,
+  year_end: 1976,
+  date_of_sale_year: 2008,
+  date_of_sale_month: 5,
+  date_of_sale_day: 14,
+  seller: "Jean-Pierre Moueix heirs",
+  buyer: "Roman Abramovich",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 101_700_000,
+  original_price: 49_300_000,
+  painting: "Les Noces de Pierrette",
+  image: "les_noces_de_pierrette.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1905,
+  year_end: 1905,
+  date_of_sale_year: 1989,
+  date_of_sale_month: 11,
+  date_of_sale_day: 30,
+  seller: "Fredrik Roos",
+  buyer: "Tomonori Tsurumaki",
+  auction_house: "Binoche et Godeau",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 101_500_000,
+  original_price: 80_000_000,
+  painting: "False Start",
+  image: "false_start.jpg",
+  artist: "Jasper Johns",
+  year_start: 1959,
+  year_end: 1959,
+  date_of_sale_year: 2006,
+  date_of_sale_month: 10,
+  date_of_sale_day: 12,
+  seller: "David Geffen",
+  buyer: "Kenneth C. Griffin",
+  auction_house: "Private sale via Richard Gray",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 100_900_000,
+  original_price: 57_000_000,
+  painting: "A Wheatfield with Cypresses",
+  image: "a_wheatfield_with_cypresses.jpg",
+  artist: "Vincent van Gogh",
+  year_start: 1889,
+  year_end: 1889,
+  date_of_sale_year: 1993,
+  date_of_sale_month: 5,
+  date_of_sale_day: 0,
+  seller: "Emil Georg Bührle's son",
+  buyer: "Walter H. Annenberg",
+  auction_house: "Private sale via Steven Mazoh",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 100_900_000,
+  original_price: 85_000_000,
+  painting: "Te Fare (La maison)",
+  image: "te_fare.jpg",
+  artist: "Paul Gauguin",
+  year_start: 1892,
+  year_end: 1892,
+  date_of_sale_year: 2008,
+  date_of_sale_month: 6,
+  date_of_sale_day: 0,
+  seller: "Yves Bouvier",
+  buyer: "Dmitry Rybolovlev",
+  auction_house: "Private sale",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 98_700_000,
+  original_price: 47_800_000,
+  painting: "Yo, Picasso",
+  image: "yo_picasso.jpg",
+  artist: "Pablo Picasso",
+  year_start: 1901,
+  year_end: 1901,
+  date_of_sale_year: 1989,
+  date_of_sale_month: 5,
+  date_of_sale_day: 9,
+  seller: "Wendell Cherry",
+  buyer: "Stavros Niarchos",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 98_600_000,
+  original_price: 80_000_000,
+  painting: "Turquoise Marilyn",
+  image: "turquoise_marilyn.jpg",
+  artist: "Andy Warhol",
+  year_start: 1964,
+  year_end: 1964,
+  date_of_sale_year: 2007,
+  date_of_sale_month: 5,
+  date_of_sale_day: 20,
+  seller: "Stefan Edlis",
+  buyer: "Steven A. Cohen",
+  auction_house: "Private sale via Larry Gagosian",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 97_300_000,
+  original_price: 70_000_000,
+  painting: "Portrait of Alfonso d'Avalos with a Page",
+  image: "portrait_of_alfonso_d_avalos.jpg",
+  artist: "Titian",
+  year_start: 1533,
+  year_end: 1533,
+  date_of_sale_year: 2003,
+  date_of_sale_month: 11,
+  date_of_sale_day: 0,
+  seller: "AXA insurance company",
+  buyer: "Getty Museum",
+  auction_house: "Private sale via Hervé Aaron",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 96_800_000,
+  original_price: 86_900_000,
+  painting: "Orange, Red, Yellow",
+  image: "orange_red_yellow.jpg",
+  artist: "Mark Rothko",
+  year_start: 1961,
+  year_end: 1961,
+  date_of_sale_year: 2012,
+  date_of_sale_month: 5,
+  date_of_sale_day: 8,
+  seller: "David Pincus estate",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 95_700_000,
+  original_price: 80_500_000,
+  painting: "Le Bassin aux Nymphéas",
+  image: "le_bassin_aux_nympheas.jpg",
+  artist: "Claude Monet",
+  year_start: 1919,
+  year_end: 1919,
+  date_of_sale_year: 2008,
+  date_of_sale_month: 6,
+  date_of_sale_day: 24,
+  seller: "J. Irwin and Xenia S. Miller",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 93_600_000,
+  original_price: 91_900_000,
+  painting: "Chop Suey",
+  image: "chop_suey.jpg",
+  artist: "Edward Hopper",
+  year_start: 1929,
+  year_end: 1929,
+  date_of_sale_year: 2018,
+  date_of_sale_month: 11,
+  date_of_sale_day: 13,
+  seller: "Barney A. Ebsworth estate",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 92_900_000,
+  original_price: 60_500_000,
+  painting: "Rideau, Cruchon et Compotier",
+  image: "rideau_cruchon_et_compotier.jpg",
+  artist: "Paul Cézanne",
+  year_start: 1894,
+  year_end: 1894,
+  date_of_sale_year: 1999,
+  date_of_sale_month: 5,
+  date_of_sale_day: 10,
+  seller: "Whitney Family",
+  buyer: "Sotheby's",
+  auction_house: "",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 91_900_000,
+  original_price: 90_300_000,
+  painting: "Portrait of an Artist (Pool with Two Figures)",
+  image: "portrait_of_an_artist_pool_with_two_figures.jpg",
+  artist: "David Hockney",
+  year_start: 1972,
+  year_end: 1972,
+  date_of_sale_year: 2018,
+  date_of_sale_month: 11,
+  date_of_sale_day: 15,
+  seller: "",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 90_900_000,
+  original_price: 84_200_000,
+  painting: "Black Fire I",
+  image: "black_fire_i.jpg",
+  artist: "Barnett Newman",
+  year_start: 1961,
+  year_end: 1961,
+  date_of_sale_year: 2014,
+  date_of_sale_month: 5,
+  date_of_sale_day: 13,
+  seller: "Private Collection",
+  buyer: "Anonymous",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 89_800_000,
+  original_price: 72_800_000,
+  painting: "White Center (Yellow, Pink and Lavender on Rose)",
+  image: "white_center_yellow_pink_and_lavender_on_rose.jpg",
+  artist: "Mark Rothko",
+  year_start: 1950,
+  year_end: 1950,
+  date_of_sale_year: 2007,
+  date_of_sale_month: 5,
+  date_of_sale_day: 15,
+  seller: "David Rockefeller, Sr.",
+  buyer: "Sheikh Hamad bin Khalifa Al-Thani",
+  auction_house: "Sotheby's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 89_300_000,
+  original_price: 39_700_000,
+  painting: "Vase with Fifteen Sunflowers",
+  image: "vase_with_fifteen_sunflowers.jpg",
+  artist: "Vincent van Gogh",
+  year_start: 1889,
+  year_end: 1889,
+  date_of_sale_year: 1987,
+  date_of_sale_month: 3,
+  date_of_sale_day: 30,
+  seller: "Helen Beatty, daughter-in-law of Chester Beatty",
+  buyer: "Yasuo Goto, Yasuda Comp.",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 88_800_000,
+  original_price: 88_800_000,
+  painting: "Buffalo II",
+  image: "buffalo_ii.jpg",
+  artist: "Robert Rauschenberg",
+  year_start: 1964,
+  year_end: 1964,
+  date_of_sale_year: 2019,
+  date_of_sale_month: 5,
+  date_of_sale_day: 15,
+  seller: "Robert and Beatrice Mayer Estate",
+  buyer: "Alice Walton",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 88_500_000,
+  original_price: 81_900_000,
+  painting: "Triple Elvis",
+  image: "triple_elvis.jpg",
+  artist: "Andy Warhol",
+  year_start: 1963,
+  year_end: 1964,
+  date_of_sale_year: 2014,
+  date_of_sale_month: 11,
+  date_of_sale_day: 12,
+  seller: "WestSpiel",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 88_400_000,
+  original_price: 71_700_000,
+  painting: "Green Car Crash (Green Burning Car I)",
+  image: "green_car_crash.jpg",
+  artist: "Andy Warhol",
+  year_start: 1963,
+  year_end: 1963,
+  date_of_sale_year: 2007,
+  date_of_sale_month: 5,
+  date_of_sale_day: 16,
+  seller: "Private collection, Zürich",
+  buyer: "Philip Niarchos",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
+
+%Painting{
+  adjusted_price: 88_400_000,
+  original_price: 81_900_000,
+  painting: "No. 10",
+  image: "no._10.jpg",
+  artist: "Mark Rothko",
+  year_start: 1958,
+  year_end: 1958,
+  date_of_sale_year: 2015,
+  date_of_sale_month: 5,
+  date_of_sale_day: 13,
+  seller: "",
+  buyer: "",
+  auction_house: "Christie's",
+}
+|> Repo.insert!()
 
