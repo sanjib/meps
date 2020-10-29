@@ -21,7 +21,6 @@ defmodule MepsWeb.MepsLive do
   ### HANDLE PARAMS ###
 
   def handle_params(params, _uri, socket) do
-    IO.puts "--> params: #{inspect params}"
     artist = get_params_artist(params["artist"])
     century = get_params_century(params["century"])
     sort_by = get_params_sort_by(params["sort_by"])
